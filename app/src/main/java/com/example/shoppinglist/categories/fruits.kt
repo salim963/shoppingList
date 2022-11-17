@@ -69,7 +69,7 @@ val myitems= listOf(
     MyIcons(R.drawable.kiwi,"Kiwi","Add to list"),
     MyIcons(R.drawable.orange,"Orange","Add to list"),
     MyIcons(R.drawable.papaya,"Papaya","Add to list"),
-    MyIcons(R.drawable.strawberry,"Strawberry","Add to list"),
+    MyIcons(R.drawable.stawberry,"Strawberry","Add to list"),
     MyIcons(R.drawable.watermelon,"Watermelon","Add to list")
 )
 
