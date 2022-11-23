@@ -34,32 +34,12 @@ fun HomeScreen() {
     }
 }
 
-/*@Composable
-fun CreateNewList_btn() {
+fun createList() {
+// list of items
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Magenta),
-        horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Button(
-            onClick = { *//*TODO*//* },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "Create",
-                fontSize = MaterialTheme.typography.h3.fontSize,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
-        }
-    }
+}
 
-    }*/
+@Preview(showBackground = true)
 
 
 @Composable
