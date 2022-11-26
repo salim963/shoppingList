@@ -7,6 +7,10 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
+var black = Color(0xFF000000)
+var white = Color(0xFFFFFFFF)
+var buttonColor = Color(0xFF3B3B3B)
+
 object Utils{
     val colors = listOf(
         Color(0xFFFFFFFF),

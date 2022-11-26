@@ -1,7 +1,10 @@
 package com.example.shoppinglist.screen.home
 
+import android.text.style.BackgroundColorSpan
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -10,21 +13,33 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.shoppinglist.login.LoginUiState
 import com.example.shoppinglist.model.Notes
 import com.example.shoppinglist.repository.Resources
 import com.example.shoppinglist.ui.theme.Utils
+import com.example.shoppinglist.ui.theme.white
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+
+
 
 @OptIn(ExperimentalFoundationApi::class, androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
@@ -46,6 +61,8 @@ fun Home(
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
 
+
+
    /* LaunchedEffect(key1 = Unit) {
         homeViewModel?.loadNotes()
     }*/
@@ -53,14 +70,13 @@ fun Home(
         homeViewModel?.loadNotes()
     }
 
-    Scaffold(
+        Scaffold(
         scaffoldState = scaffoldState,
         floatingActionButton = {
             FloatingActionButton(onClick = { navToDetailPage.invoke() }) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = null,
-                )
+
+                Text(" ADD Note ")
+
             }
         },
         topBar = {
@@ -78,11 +94,15 @@ fun Home(
                     }
                 },
                 title = {
-                    Text(text = "Home")
-                }
+                    Text(text = "Welcome ")
+                },
+                backgroundColor = Color(0xFF0A84FF)
             )
         }
+
+
     ) { padding ->
+
         Column(modifier = Modifier.padding(padding)) {
             when (homeUiState.notesList) {
                 is Resources.Loading -> {
@@ -119,7 +139,7 @@ fun Home(
                             onDismissRequest = {
                                 openDialog = false
                             },
-                            title = { Text(text = "Delete Note?") },
+                            title = { Text(text = "Are u sure, Delete Note?") },
                             confirmButton = {
                                 Button(
                                     onClick = {
@@ -244,12 +264,69 @@ private fun formatDate(timestamp: Timestamp): String {
 @Preview
 @Composable
 fun PrevHomeScreen() {
-
     Home(
         homeViewModel = null,
         onNoteClick = {},
         navToDetailPage = { /*TODO*/ }
     ) {
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@Composable
+fun EmptyNotes(
+    onClick : () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center)
+                .clickable(
+                    onClick = onClick
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(75.dp)
+                    .alpha(0.5F),
+                painter = painterResource(id = com.example.shoppinglist.R.drawable.mynote),
+                contentDescription = "Logo",
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = "Hmm...Looks like it's empty here!!",
+                textAlign = TextAlign.Center,
+                style = TextStyle(
+                    color = white.copy(0.4F),
+                    fontSize = 16.sp
+                )
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = "ADD NOTES",
+                textAlign = TextAlign.Center,
+                style = TextStyle(
+                    color = white.copy(0.4F),
+                    fontSize = 20.sp
+                )
+            )
+        }
 
     }
 }
