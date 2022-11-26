@@ -107,6 +107,7 @@ fun Home(
         }
 
 
+
     ) { padding ->
 
         Column(modifier = Modifier.padding(padding)) {
@@ -119,15 +120,15 @@ fun Home(
                     )
                 }
 
-                is Resources.IsEmpty->{
-                  //  EmptyNotes{}
-                }
+
 
                 is Resources.Success -> {
                     LazyVerticalGrid(
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(16.dp),
-                    ) {
+                        columns = GridCells.Fixed(1),
+                        contentPadding = PaddingValues(20.dp),
+
+                    )
+                    {
                         items(
                             homeUiState.notesList.data ?: emptyList()
                         ) { note ->
@@ -189,6 +190,8 @@ fun Home(
             }
 
 
+
+
         }
 
     }
@@ -227,9 +230,10 @@ fun NoteItem(
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
-                modifier = Modifier.padding(4.dp)
+                modifier = Modifier.padding(4.dp),
+                color = Color.White
             )
-            Spacer(modifier = Modifier.size(4.dp))
+            Spacer(modifier = Modifier.fillMaxSize())
             CompositionLocalProvider(
                 LocalContentAlpha provides ContentAlpha.disabled
             ) {
@@ -341,6 +345,10 @@ fun EmptyNotes(
     }
 
 }
+
+
+
+
 
 
 

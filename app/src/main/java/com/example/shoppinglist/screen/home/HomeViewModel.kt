@@ -65,15 +65,6 @@ class HomeViewModel(
     fun signOut() = repository.signOut()
 
 
-
-
-
-
-
-
-
-
-
 }
 
 data class HomeUiState(
@@ -81,6 +72,8 @@ data class HomeUiState(
     val noteDeletedStatus: Boolean = false,
     val noNotes:Boolean = false,
 )
+
+
 
 
 

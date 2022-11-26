@@ -27,3 +27,14 @@ object Utils{
         Color(0xFF03DAC5),
     )
 }
+
+
+ var  card1 = Color(0xFFFFAB91)
+var card2 = Color(0xFFFFCC80)
+var card3 = Color(0xFFE6EE9B)
+var card4 = Color(0xFF80DEEA)
+var card5 = Color(0xFFCF93D9)
+var card6 = Color(0xFFF48FB1)
+var card7 = Color(0xFF80CBC4)
+var card8 = Color(0xFFFFAB91)
+var card9 = Color(0xFFF48FB1)
