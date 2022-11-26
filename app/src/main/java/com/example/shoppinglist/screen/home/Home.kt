@@ -48,6 +48,7 @@ fun Home(
     onNoteClick: (id: String) -> Unit,
     navToDetailPage: () -> Unit,
     navToLoginPage: () -> Unit,
+
 ) {
     val homeUiState = homeViewModel?.homeUiState ?: HomeUiState()
 
@@ -66,6 +67,10 @@ fun Home(
    /* LaunchedEffect(key1 = Unit) {
         homeViewModel?.loadNotes()
     }*/
+
+
+
+
     LaunchedEffect(key1 = homeViewModel){
         homeViewModel?.loadNotes()
     }
@@ -188,6 +193,7 @@ fun Home(
 
 
 }
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
