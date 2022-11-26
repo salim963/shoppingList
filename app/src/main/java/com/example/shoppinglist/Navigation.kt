@@ -20,7 +20,8 @@ enum class LoginRoutes {
 
 enum class HomeRoutes {
     Home,
-    Detail
+    Detail,
+    Profile
 }
 
 enum class NestedRoutes {
@@ -122,15 +123,19 @@ fun NavGraphBuilder.homeGraph(
                     navController.navigate(HomeRoutes.Detail.name)
                 }
             ) {
-                navController.navigate(NestedRoutes.Login.name){
+                navController.navigate(NestedRoutes.Login.name) {
                     launchSingleTop = true
-                    popUpTo(0){
+                    popUpTo(0) {
                         inclusive = true
                     }
                 }
 
             }
+
+
         }
+
+
 
         composable(
             route = HomeRoutes.Detail.name + "?id={id}",

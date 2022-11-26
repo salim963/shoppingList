@@ -2,6 +2,7 @@ package com.example.shoppinglist.screen.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -9,8 +10,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,10 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.shoppinglist.model.Notes
 import com.example.shoppinglist.repository.Resources
 import com.example.shoppinglist.ui.theme.Utils
 import com.google.firebase.Timestamp
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,6 +36,9 @@ fun Home(
     navToDetailPage: () -> Unit,
     navToLoginPage: () -> Unit,
 ) {
+
+
+
     val homeUiState = homeViewModel?.homeUiState ?: HomeUiState()
 
     var openDialog by remember {
@@ -46,6 +51,7 @@ fun Home(
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
 
+
    /* LaunchedEffect(key1 = Unit) {
         homeViewModel?.loadNotes()
     }*/
@@ -55,6 +61,61 @@ fun Home(
 
     Scaffold(
         scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "Shopping List")
+                },
+
+                actions = {
+                    IconButton(onClick = {
+                        navToDetailPage()
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Add Note"
+                        )
+                    }
+                    IconButton(onClick = {
+                        scope.launch {
+                            scaffoldState.drawerState.open()
+                        }
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Menu"
+                        )
+                    }
+                }
+            )
+        },  drawerContent = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Cyan)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Shopping List",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(onClick = {
+                    navToDetailPage()
+                }) {
+                    Text(text = "Add Note")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(onClick = {
+                    navToLoginPage()
+                }) {
+                    Text(text = "Logout")
+                }
+            }
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = { navToDetailPage.invoke() }) {
                 Icon(
@@ -63,25 +124,50 @@ fun Home(
                 )
             }
         },
-        topBar = {
-            TopAppBar(
-                navigationIcon = {},
-                actions = {
-                    IconButton(onClick = {
-                        homeViewModel?.signOut()
-                        navToLoginPage.invoke()
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.ExitToApp,
-                            contentDescription = null,
-                        )
-                    }
-                },
-                title = {
-                    Text(text = "Home")
-                }
-            )
-        }
+
+
+//        topBar = {
+//
+//            TopAppBar(
+//
+//                navigationIcon = {},
+//                actions = {
+//                    IconButton(onClick = {
+//                        homeViewModel?.signOut()
+//                        navToLoginPage.invoke()
+//                    }) {
+//                        Icon(
+//                            imageVector = Icons.Default.ExitToApp,
+//                            contentDescription = null,
+//                        )
+//                    }
+//                },
+//                title = {
+//                    Text(text = "Home")
+//                }
+//            )
+//        }
+//        bottomBar = {
+//            BottomAppBar(
+//                cutoutShape = null,
+//                elevation = 0.dp,
+//                backgroundColor = Color.Magenta
+//            ) {
+//                IconButton(onClick = {
+//                    navToLoginPage.invoke()
+//                }) {
+//
+//                    Icon(
+//                        imageVector = Icons.Default.ExitToApp,
+//                        contentDescription = null,
+//                    )
+//                }
+//            }
+//        }
+        bottomBar = { BottomBar()}
+
+
+
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
             when (homeUiState.notesList) {
@@ -234,11 +320,57 @@ fun NoteItem(
 
 }
 
+@Composable
+fun BottomBar() {
+    val selectedIndex = remember { mutableStateOf(0) }
+    BottomNavigation(elevation = 10.dp) {
+
+        BottomNavigationItem(icon = {
+            Icon(imageVector = Icons.Default.Home,"")
+        },
+            label = { Text(text = "Home") },
+            selected = (selectedIndex.value == 0),
+            onClick = {
+                selectedIndex.value = 0
+            })
+
+        BottomNavigationItem(icon = {
+            Icon(imageVector = Icons.Default.Favorite,"")
+        },
+            label = { Text(text = "Favorite") },
+            selected = (selectedIndex.value == 1),
+            onClick = {
+                selectedIndex.value = 1
+            })
+
+        BottomNavigationItem(icon = {
+            Icon(imageVector = Icons.Default.Person,"")
+        },
+            label = { Text(text = "Profile") },
+            selected = (selectedIndex.value == 2),
+            onClick = {
+                selectedIndex.value = 2
+            })
+    }
+}
+/*@Composable
+fun ScaffoldWithBottomMenu() {
+    Scaffold(bottomBar = {BottomBar()}
+    ) {
+        //content area
+        Box(modifier = Modifier
+            .background(Color(0xff546e7a))
+            .fillMaxSize())
+    }
+}*/
+
 
 private fun formatDate(timestamp: Timestamp): String {
     val sdf = SimpleDateFormat("dd-MM-yy hh:mm", Locale.getDefault())
     return sdf.format(timestamp.toDate())
 }
+
+
 
 
 @Preview
@@ -248,7 +380,7 @@ fun PrevHomeScreen() {
     Home(
         homeViewModel = null,
         onNoteClick = {},
-        navToDetailPage = { /*TODO*/ }
+        navToDetailPage = { /*TODO*/ },
     ) {
 
     }
