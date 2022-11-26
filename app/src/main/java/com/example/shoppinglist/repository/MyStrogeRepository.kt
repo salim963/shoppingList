@@ -1,3 +1,5 @@
+@file:Suppress("IMPLICIT_CAST_TO_ANY")
+
 package com.example.shoppinglist.repository
 
 import com.example.shoppinglist.model.Notes
@@ -40,7 +42,9 @@ class MyStrogeRepository {
                     val response = if (snapshot != null) {
                         val notes = snapshot.toObjects(Notes::class.java)
                         Resources.Success(data = notes)
-                    } else {
+                    }
+
+                    else {
                         Resources.Error(throwable = e?.cause)
                     }
                     trySend(response)
@@ -149,5 +153,6 @@ sealed class Resources<T>(
     class Loading<T> : Resources<T>()
     class Success<T>(data: T?) : Resources<T>(data = data)
     class Error<T>(throwable: Throwable?) : Resources<T>(throwable = throwable)
+    class IsEmpty<T>(data: T?) : Resources<T>(data = data)
 
 }
