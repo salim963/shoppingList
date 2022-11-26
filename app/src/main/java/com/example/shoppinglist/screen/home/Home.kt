@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.shoppinglist.R
 import com.example.shoppinglist.login.LoginUiState
 import com.example.shoppinglist.model.Notes
 import com.example.shoppinglist.repository.Resources
@@ -117,6 +118,11 @@ fun Home(
                             .wrapContentSize(align = Alignment.Center)
                     )
                 }
+
+                is Resources.IsEmpty->{
+                  //  EmptyNotes{}
+                }
+
                 is Resources.Success -> {
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(2),
@@ -136,6 +142,7 @@ fun Home(
                             }
 
                         }
+
 
 
                     }
@@ -285,9 +292,6 @@ fun PrevHomeScreen() {
 
 
 
-
-
-
 @Composable
 fun EmptyNotes(
     onClick : () -> Unit
@@ -311,7 +315,7 @@ fun EmptyNotes(
                 modifier = Modifier
                     .size(75.dp)
                     .alpha(0.5F),
-                painter = painterResource(id = com.example.shoppinglist.R.drawable.mynote),
+                painter = painterResource(id = R.drawable.mynote),
                 contentDescription = "Logo",
             )
             Spacer(modifier = Modifier.height(12.dp))
@@ -335,6 +339,7 @@ fun EmptyNotes(
         }
 
     }
+
 }
 
 
