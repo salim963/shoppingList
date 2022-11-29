@@ -1,9 +1,7 @@
 package com.example.shoppinglist.screen.home
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -14,6 +12,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -119,20 +118,24 @@ fun Home(
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = {
+                    if (homeViewModel != null) {
+                        homeViewModel.signOut()
+                    }
                     navToLoginPage()
                 }) {
                     Text(text = "Logout")
+
                 }
             }
         },
-        floatingActionButton = {
+        /*floatingActionButton = {
             FloatingActionButton(onClick = { navToDetailPage.invoke() }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = null,
                 )
             }
-        },
+        },*/
 
 
 //        topBar = {
