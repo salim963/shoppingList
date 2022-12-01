@@ -1,10 +1,12 @@
 package com.example.shoppinglist.login
 
+import android.text.style.BackgroundColorSpan
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.TabRowDefaults.contentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -15,7 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
+import com.example.shoppinglist.ui.theme.black
+import com.example.shoppinglist.ui.theme.floatingB
 
 
 @Composable
@@ -36,7 +39,7 @@ fun LoginScreen(
             text = "Login",
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Black,
-            color = MaterialTheme.colors.primary
+            color = floatingB
         )
 
         if (isError){
@@ -82,7 +85,8 @@ fun LoginScreen(
             isError = isError
         )
 
-        Button(onClick = { loginViewModel?.loginUser(context) }) {
+        Button(onClick = { loginViewModel?.loginUser(context) },
+            colors = ButtonDefaults.buttonColors(backgroundColor = floatingB, contentColor = black)) {
             Text(text = "Sign In")
         }
         Spacer(modifier = Modifier.size(16.dp))
@@ -93,7 +97,10 @@ fun LoginScreen(
         ) {
             Text(text = "Don't have an Account?")
             Spacer(modifier = Modifier.size(8.dp))
-            TextButton(onClick = { onNavToSignUpPage.invoke() }) {
+            TextButton(onClick = { onNavToSignUpPage.invoke() },
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = floatingB, backgroundColor = Color.Transparent)
+            ) {
                 Text(text = "SignUp")
             }
 
@@ -139,7 +146,7 @@ fun SignUpScreen(
             text = "Sign Up",
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Black,
-            color = MaterialTheme.colors.primary
+            color = floatingB
         )
 
         if (isError){
@@ -203,7 +210,10 @@ fun SignUpScreen(
             isError = isError
         )
 
-        Button(onClick = { loginViewModel?.createUser(context) }) {
+        Button(onClick = { loginViewModel?.createUser(context) }
+            , colors = ButtonDefaults.buttonColors(backgroundColor = floatingB,contentColor = black)
+
+        ) {
             Text(text = "Sign In")
         }
         Spacer(modifier = Modifier.size(16.dp))
@@ -213,7 +223,9 @@ fun SignUpScreen(
         ) {
             Text(text = "Already have an Account?")
             Spacer(modifier = Modifier.size(8.dp))
-            TextButton(onClick = { onNavToLoginPage.invoke() }) {
+            TextButton(onClick = { onNavToLoginPage.invoke() },
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = floatingB, backgroundColor = Color.Transparent)) {
                 Text(text = "Sign In")
             }
 

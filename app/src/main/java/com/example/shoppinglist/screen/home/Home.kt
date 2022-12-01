@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
@@ -116,7 +117,8 @@ fun Home(
                             }) {
                                 Icon(
                                     imageVector = Icons.Default.Add,
-                                    contentDescription = "Add Note"
+                                    contentDescription = "Add Note",
+                                    tint  = floatingB
                                 )
                             }
                             IconButton(onClick = {
@@ -127,7 +129,8 @@ fun Home(
                             }) {
                                 Icon(
                                     imageVector = Icons.Default.Menu,
-                                    contentDescription = "Menu"
+                                    contentDescription = "Menu",
+                                    tint  = floatingB
                                 )
                             }
                         }
@@ -376,8 +379,19 @@ fun BottomBar() {
     val selectedIndex = remember { mutableStateOf(0) }
     BottomNavigation(elevation = 10.dp) {
 
+
         BottomNavigationItem(icon = {
-            Icon(imageVector = Icons.Default.Home,"")
+            Icon(imageVector = Icons.Default.Favorite,"" )
+        },
+            label = { Text(text = "Favorite") },
+            selected = (selectedIndex.value == 1),
+            onClick = {
+                selectedIndex.value = 1
+            })
+
+
+        BottomNavigationItem(icon = {
+            Icon(imageVector = Icons.Default.Home,"" ,  tint  = floatingB )
         },
             label = { Text(text = "Home") },
             selected = (selectedIndex.value == 0),
@@ -386,16 +400,7 @@ fun BottomBar() {
             })
 
         BottomNavigationItem(icon = {
-            Icon(imageVector = Icons.Default.Favorite,"")
-        },
-            label = { Text(text = "Favorite") },
-            selected = (selectedIndex.value == 1),
-            onClick = {
-                selectedIndex.value = 1
-            })
-
-        BottomNavigationItem(icon = {
-            Icon(imageVector = Icons.Default.Person,"")
+            Icon(imageVector = Icons.Default.Person,"" )
         },
             label = { Text(text = "Profile") },
             selected = (selectedIndex.value == 2),
