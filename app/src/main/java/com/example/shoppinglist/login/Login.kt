@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -46,11 +47,11 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
-            painter = painterResource(id = R.drawable.fb),
+            painter = painterResource(id = R.drawable.firebase1),
             contentDescription = "Logo",
             modifier = Modifier
-                .padding(top = 20.dp)
-                .size(100.dp),
+                .padding(top = 30.dp)
+                .size(90.dp),
             contentScale = ContentScale.Crop,
         )
         Text(
@@ -82,6 +83,12 @@ fun LoginScreen(
             label = {
                 Text(text = "Email")
             },
+
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = floatingB,
+                unfocusedBorderColor = Yellow,
+                focusedLabelColor =floatingB,
+                cursorColor =floatingB),
             isError = isError
         )
         OutlinedTextField(
@@ -99,6 +106,11 @@ fun LoginScreen(
             label = {
                 Text(text = "Password")
             },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = floatingB,
+                unfocusedBorderColor = Yellow,
+                focusedLabelColor =floatingB,
+                cursorColor =floatingB),
             visualTransformation = PasswordVisualTransformation(),
             isError = isError
         )
@@ -126,7 +138,8 @@ fun LoginScreen(
         }
 
         if (loginUiState?.isLoading == true){
-            CircularProgressIndicator()
+            CircularProgressIndicator( color = floatingB)
+
         }
 
         LaunchedEffect(key1 = loginViewModel?.hasUser){
@@ -189,6 +202,11 @@ fun SignUpScreen(
             label = {
                 Text(text = "Email")
             },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = floatingB,
+                unfocusedBorderColor = Yellow,
+                focusedLabelColor =floatingB,
+                cursorColor =floatingB),
             isError = isError
         )
         OutlinedTextField(
@@ -206,6 +224,12 @@ fun SignUpScreen(
             label = {
                 Text(text = "Password")
             },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = floatingB,
+                unfocusedBorderColor = Yellow,
+                focusedLabelColor =floatingB,
+                cursorColor =floatingB),
+
             visualTransformation = PasswordVisualTransformation(),
             isError = isError
         )
@@ -224,6 +248,11 @@ fun SignUpScreen(
             label = {
                 Text(text = "Confirm Password")
             },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = floatingB,
+                unfocusedBorderColor = Yellow,
+                focusedLabelColor =floatingB,
+                cursorColor =floatingB),
             visualTransformation = PasswordVisualTransformation(),
             isError = isError
         )
