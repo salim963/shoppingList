@@ -100,7 +100,7 @@ fun Home(
                         backgroundColor = floatingB,
                         contentColor = black) {
 
-                        Text(" ADD Note ")
+                        Text(" ADD List ")
 
                     }
                 },

@@ -89,7 +89,7 @@ fun DetailScreen(
 
                 LaunchedEffect(scaffoldState.snackbarHostState) {
                     scaffoldState.snackbarHostState
-                        .showSnackbar("Added Note Successfully")
+                        .showSnackbar("Added List Successfully")
                     detailViewModel?.resetNoteAdded()
                     onNavigate.invoke()
                 }
@@ -98,7 +98,7 @@ fun DetailScreen(
             if (detailUiState.noteUpdatedStatus) {
                 LaunchedEffect(scaffoldState.snackbarHostState) {
                     scaffoldState.snackbarHostState
-                        .showSnackbar("Note Updated Successfully")
+                        .showSnackbar("List Updated Successfully")
                     detailViewModel?.resetNoteAdded()
                     onNavigate.invoke()
                 }
@@ -142,7 +142,7 @@ fun DetailScreen(
             OutlinedTextField(
                 value = detailUiState.note,
                 onValueChange = { detailViewModel?.onNoteChange(it) },
-                label = { Text(text = "Notes") },
+                label = { Text(text = "Lists") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
