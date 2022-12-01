@@ -100,4 +100,5 @@
 
     <string name="todo_show_complete">Show completed task</string>
     <string name="todo_hide_complete">Hide completed task</string>
+    <string name="firebase_pic" />
 </resources>

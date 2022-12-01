@@ -1,6 +1,10 @@
 package com.example.shoppinglist.login
 
 import android.text.style.BackgroundColorSpan
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -14,11 +18,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.shoppinglist.R
 import com.example.shoppinglist.ui.theme.black
 import com.example.shoppinglist.ui.theme.floatingB
 
@@ -37,6 +45,14 @@ fun LoginScreen(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.fb),
+            contentDescription = "Logo",
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .size(100.dp),
+            contentScale = ContentScale.Crop,
+        )
         Text(
             text = "Login",
             style = MaterialTheme.typography.h3,
@@ -223,7 +239,7 @@ fun SignUpScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
-            Text(text = "Already have an Account?", modifier = Modifier.padding(top = 12.dp))
+            Text(text = "Already have an Account?")
             Spacer(modifier = Modifier.size(8.dp))
             TextButton(onClick = { onNavToLoginPage.invoke() },
                 colors = ButtonDefaults.buttonColors(
