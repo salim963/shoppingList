@@ -10,6 +10,8 @@ import androidx.compose.material3.TabRowDefaults.contentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -95,7 +97,7 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
-            Text(text = "Don't have an Account?")
+            Text(text = "Don't have an Account?",  modifier = Modifier.padding(top = 12.dp))
             Spacer(modifier = Modifier.size(8.dp))
             TextButton(onClick = { onNavToSignUpPage.invoke() },
                 colors = ButtonDefaults.buttonColors(
@@ -221,7 +223,7 @@ fun SignUpScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
-            Text(text = "Already have an Account?")
+            Text(text = "Already have an Account?", modifier = Modifier.padding(top = 12.dp))
             Spacer(modifier = Modifier.size(8.dp))
             TextButton(onClick = { onNavToLoginPage.invoke() },
                 colors = ButtonDefaults.buttonColors(
