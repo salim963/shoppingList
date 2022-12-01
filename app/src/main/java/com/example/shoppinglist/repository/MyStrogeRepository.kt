@@ -28,7 +28,7 @@ class MyStrogeRepository {
     private val notesRef: CollectionReference = Firebase
         .firestore.collection(NOTES_COLLECTION_REF)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+
     fun getUserNotes(
         userId: String,
     ): Flow<Resources<List<Notes>>> = callbackFlow {
