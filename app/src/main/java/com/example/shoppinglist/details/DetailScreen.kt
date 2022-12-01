@@ -29,6 +29,7 @@ import com.example.shoppinglist.ui.theme.Utils
 import android.content.Context
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import com.example.shoppinglist.ui.theme.floatingB
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -70,7 +71,8 @@ fun DetailScreen(
                         } else {
                             detailViewModel?.addNote()
                         }
-                    }
+                    },
+                    backgroundColor = floatingB,
                 ) {
                     Icon(imageVector = icon, contentDescription = null)
                 }

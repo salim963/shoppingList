@@ -7,6 +7,10 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
+val floatingB = Color(0xFF5EDF63)
+
+val drawerContent =Color(0xBED2F04F)
+
 var black = Color(0xFF000000)
 var white = Color(0xFFFFFFFF)
 var buttonColor = Color(0xFF3B3B3B)
