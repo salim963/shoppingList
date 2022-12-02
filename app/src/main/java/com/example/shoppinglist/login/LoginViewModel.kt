@@ -153,8 +153,8 @@ class LoginViewModel @Inject constructor(
 
 
 data class LoginUiState(
-    val userName: String = "",
-    val password: String = "",
+    val userName: String = "ian@dtu.dk",
+    val password: String = "123456",
     val userNameSignUp: String = "",
     val passwordSignUp: String = "",
     val confirmPasswordSignUp: String = "",
