@@ -10,19 +10,43 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Auth repository
+ *
+ * @property firebaseAuth
+ * @constructor Create empty Auth repository
+ * https://firebase.google.com/docs/auth/android/start
+ * https://www.section.io/engineering-education/integrating-firestore-in-android-kotlin/
+ */
 class AuthRepository @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) {
 
     val currentUser: FirebaseUser? = firebaseAuth.currentUser
 
+    /**
+     * Has user
+     *
+     * @return
+     */
     fun hasUser(): Boolean = firebaseAuth.currentUser != null
 
+    /**
+     * Get user id
+     *
+     * @return
+     */
     fun getUserId(): String = firebaseAuth.currentUser?.uid.orEmpty()
 
 
-
-
+    /**
+     * Create user
+     *
+     * @param email
+     * @param password
+     * @param onComplete
+     * @receiver
+     */
     suspend fun createUser(
         email: String,
         password: String,
@@ -41,7 +65,14 @@ class AuthRepository @Inject constructor(
     }
 
 
-
+    /**
+     * Login
+     *
+     * @param email
+     * @param password
+     * @param onComplete
+     * @receiver
+     */
     suspend fun login(
         email: String,
         password: String,
@@ -59,6 +90,10 @@ class AuthRepository @Inject constructor(
             }.await()
     }
 
+    /**
+     * Logout
+     *
+     */
     suspend fun logout() = withContext(Dispatchers.IO) {
         firebaseAuth.signOut()
 
