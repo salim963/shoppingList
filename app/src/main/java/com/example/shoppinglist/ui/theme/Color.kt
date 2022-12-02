@@ -17,7 +17,6 @@ var buttonColor = Color(0xFF3B3B3B)
 
 object Utils{
     val colors = listOf(
-        Color(0xFFFFFFFF),
         Color(0xFFFF453A),
         Color(0xFFFF9F0A),
         Color(0xFFFFD60A),

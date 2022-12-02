@@ -269,7 +269,7 @@ fun SignUpScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
-            Text(text = "Already have an Account?")
+            Text(text = "Already have an Account?",modifier = Modifier.padding(top = 12.dp))
             Spacer(modifier = Modifier.size(8.dp))
             TextButton(onClick = { onNavToLoginPage.invoke() },
                 colors = ButtonDefaults.buttonColors(
