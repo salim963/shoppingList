@@ -1,5 +1,6 @@
 package com.example.shoppinglist.repository
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -9,12 +10,15 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor() {
-    val currentUser: FirebaseUser? = Firebase.auth.currentUser
+class AuthRepository @Inject constructor(
+    private val firebaseAuth: FirebaseAuth
+) {
 
-    fun hasUser(): Boolean = Firebase.auth.currentUser != null
+    val currentUser: FirebaseUser? = firebaseAuth.currentUser
 
-    fun getUserId(): String = Firebase.auth.currentUser?.uid.orEmpty()
+    fun hasUser(): Boolean = firebaseAuth.currentUser != null
+
+    fun getUserId(): String = firebaseAuth.currentUser?.uid.orEmpty()
 
 
 
@@ -25,7 +29,7 @@ class AuthRepository @Inject constructor() {
         onComplete: (Boolean) -> Unit
     ) = withContext(Dispatchers.IO) {
 
-        Firebase.auth
+        firebaseAuth
             .createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -44,7 +48,7 @@ class AuthRepository @Inject constructor() {
         onComplete: (Boolean) -> Unit
     ) = withContext(Dispatchers.IO) {
 
-        Firebase.auth
+        firebaseAuth
             .signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -56,7 +60,7 @@ class AuthRepository @Inject constructor() {
     }
 
     suspend fun logout() = withContext(Dispatchers.IO) {
-        Firebase.auth.signOut()
+        firebaseAuth.signOut()
 
 
     }

@@ -6,27 +6,30 @@ import com.example.shoppinglist.model.Notes
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import javax.inject.Inject
 
 
 const val NOTES_COLLECTION_REF = "notes"
 
-class MyStrogeRepository {
+class MyStorageRepository @Inject constructor(
+    private val firebaseAuth:FirebaseAuth,
+    private val fireStore: FirebaseFirestore
 
-    fun user() = Firebase.auth.currentUser
-    fun hasUser(): Boolean = Firebase.auth.currentUser != null
+) {
 
-    fun getUserId(): String = Firebase.auth.currentUser?.uid.orEmpty()
+    fun user() = firebaseAuth.currentUser
+    fun hasUser(): Boolean = firebaseAuth.currentUser != null
 
-    private val notesRef: CollectionReference = Firebase
-        .firestore.collection(NOTES_COLLECTION_REF)
+    fun getUserId(): String = firebaseAuth.currentUser?.uid.orEmpty()
+
+    private val notesRef: CollectionReference = fireStore.collection(NOTES_COLLECTION_REF)
 
 
     fun getUserNotes(
@@ -140,7 +143,7 @@ class MyStrogeRepository {
 
     }
 
-    fun signOut() = Firebase.auth.signOut()
+    fun signOut() = firebaseAuth.signOut()
 
 
 }
