@@ -5,12 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.shoppinglist.model.Notes
-import com.example.shoppinglist.repository.MyStrogeRepository
+import com.example.shoppinglist.repository.MyStorageRepository
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel(
-    private val repository: MyStrogeRepository = MyStrogeRepository()
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    private val repository: MyStorageRepository
 ):ViewModel() {
  var detailUiState by mutableStateOf(DetailUiState())
   private set

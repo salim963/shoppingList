@@ -8,10 +8,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shoppinglist.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(
-    private val repository: AuthRepository = AuthRepository(),
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val repository: AuthRepository
 ) : ViewModel() {
     val currentUser = repository.currentUser
 
